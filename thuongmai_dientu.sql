@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 27, 2020 lúc 10:58 AM
+-- Thời gian đã tạo: Th5 08, 2020 lúc 05:58 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.1
 
@@ -69,11 +69,28 @@ CREATE TABLE `hoadon` (
   `ngaymua` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tongtien` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `trangthai` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phuongthucthanhtoan` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ten` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sdt` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dia_chi` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ghi_chu` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_user` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `hoadon`
+--
+
+INSERT INTO `hoadon` (`id`, `ngaymua`, `tongtien`, `trangthai`, `ten`, `sdt`, `dia_chi`, `ghi_chu`, `id_user`, `created_at`, `updated_at`) VALUES
+(1, '20-05-08', '4,840,000.00', '1', 'Lê Văn Tự', '09745555', 'hải phòng', 'aaaaa', 3, '2020-05-08 06:04:40', '2020-05-08 08:02:43'),
+(2, '20-05-08', '4,840,000.00', '0', 'Lê Văn Tự', '09745555', 'hải phòng', 'aaaaa', 3, '2020-05-08 06:05:48', '2020-05-08 06:05:48'),
+(3, '20-05-08', '24,200,000.00', '0', 'Lê Văn Tự', '09745555', 'hải phòng', '6111111111111111', 3, '2020-05-08 07:44:08', '2020-05-08 07:44:08'),
+(4, '20-05-08', '24,200,000.00', '0', 'Lê Văn Tự', '09745555', 'hải phòng', '6111111111111111', 3, '2020-05-08 07:44:19', '2020-05-08 07:44:19'),
+(5, '20-05-08', '24,200,000.00', '0', 'Lê Văn Tự', '09745555', 'hải phòng', '22', 3, '2020-05-08 07:46:01', '2020-05-08 07:46:01'),
+(6, '20-05-08', '24,200,000.00', '0', 'Lê Văn Tự', '09745555', 'hải phòng', '22', 3, '2020-05-08 07:46:29', '2020-05-08 07:46:29'),
+(7, '20-05-08', '30,250,000.00', '0', 'Trinh Linh', '09745555', 'hải phòng', 'aaaa', 3, '2020-05-08 08:01:59', '2020-05-08 08:01:59'),
+(8, '20-05-08', '4,840,000.00', '0', 'Trinh Linh', '09745555', 'hải phòng', 'aaaa', 3, '2020-05-08 08:55:57', '2020-05-08 08:55:57');
 
 -- --------------------------------------------------------
 
@@ -83,12 +100,21 @@ CREATE TABLE `hoadon` (
 
 CREATE TABLE `hoadonchitiet` (
   `id` int(10) UNSIGNED NOT NULL,
-  `ten` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_hoadon` int(10) UNSIGNED NOT NULL,
   `id_sanpham` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `soluongmua` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `hoadonchitiet`
+--
+
+INSERT INTO `hoadonchitiet` (`id`, `id_hoadon`, `id_sanpham`, `created_at`, `updated_at`, `soluongmua`) VALUES
+(1, 6, 6, '2020-05-08 07:46:29', '2020-05-08 07:46:29', 5),
+(2, 7, 5, '2020-05-08 08:01:59', '2020-05-08 08:01:59', 1),
+(3, 8, 4, '2020-05-08 08:55:57', '2020-05-08 08:55:57', 1);
 
 -- --------------------------------------------------------
 
@@ -128,31 +154,7 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_09_24_163810_the_loai', 2),
-(4, '2019_09_24_164827_thuong_hieu', 3),
-(5, '2019_09_24_164934_he_dieu_hanh', 4),
-(6, '2019_09_24_165011_ram', 5),
-(7, '2019_09_24_165104_bo_nho_trong', 6),
-(8, '2019_09_24_165143_mau_sac', 7),
-(9, '2019_09_24_165229_san_pham', 8),
-(10, '2019_09_24_165938_comment', 9),
-(11, '2019_09_24_170254_slide', 10),
-(12, '2019_09_24_170333_hoadon', 11),
-(13, '2019_09_24_170513_hoadonchitiet', 12);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(1, '2014_10_12_000000_create_users_table', 1);
 
 -- --------------------------------------------------------
 
@@ -205,7 +207,6 @@ CREATE TABLE `sanpham` (
   `id_theloai` int(10) UNSIGNED NOT NULL,
   `id_hedieuhanh` int(10) UNSIGNED NOT NULL,
   `id_ram` int(10) UNSIGNED NOT NULL,
-  `id_bonhotrong` int(10) UNSIGNED NOT NULL,
   `trangthai` int(11) NOT NULL DEFAULT 1,
   `gia` double NOT NULL,
   `gia_sale` double DEFAULT NULL,
@@ -217,23 +218,23 @@ CREATE TABLE `sanpham` (
 -- Đang đổ dữ liệu cho bảng `sanpham`
 --
 
-INSERT INTO `sanpham` (`id`, `ten`, `hinhanh`, `soluong`, `id_mausacsanpham`, `manhinh`, `camera_truoc`, `camera_sau`, `cpu`, `dungluongpin`, `trongluong`, `dophangiai_manhinh`, `kichthuoc`, `gps`, `bluetooth`, `id_theloai`, `id_hedieuhanh`, `id_ram`, `id_bonhotrong`, `trangthai`, `gia`, `gia_sale`, `created_at`, `updated_at`) VALUES
-(1, 'Iphone 7 Plus', 'Iphone7Plus.jpg', 10, 2, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12MP', 'Apple A10 Fusion 4 nhân 64-bit', '1960', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 1, 1, 1, 5000000, 4000000, '2019-10-22 02:29:49', '2019-10-22 02:00:34'),
-(2, 'Iphone 8 Plus', 'Iphone8Plus.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '2658', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 3, 1, 7000000, 4000000, '2019-10-22 02:57:29', NULL),
-(3, 'Iphone 11', 'Iphone11.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '1988', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 3, 1, 3500000, 0, '2019-10-22 02:58:12', NULL),
-(4, 'Iphone 11 Pro', 'Iphone11Pro.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3922', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 2, 3, 1, 8200000, 4000000, '2019-10-22 03:09:26', NULL),
-(5, 'Iphone 11 Pro Max', 'Iphone11ProMax.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4212', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 3, 1, 25000000, 0, '2019-10-22 03:09:26', NULL),
-(6, 'Iphone X', 'IphoneX.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3658', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 2, 3, 1, 10300000, 4000000, '2019-10-22 03:09:26', NULL),
-(7, 'Iphone Xr', 'IphoneXr.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3782', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 3, 1, 7400000, 4000000, '2019-10-22 03:09:26', NULL),
-(8, 'Iphone XS', 'IphoneXS.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3622', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 1, 1, 18200000, 4000000, '2019-10-22 03:09:26', NULL),
-(9, 'Iphone XS Max', 'IphoneXSMax.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4588', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 3, 1, 29500000, 4000000, '2019-10-22 03:09:26', NULL),
-(10, 'SamSung Galaxy A30s', 'SamSungA30s.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4000', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 2, 3, 1, 6200000, 4000000, '2019-10-22 03:09:26', NULL),
-(11, 'SamSung Galaxy A50s', 'SamSungA50s.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4300', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 3, 2, 1, 9000000, 4000000, '2019-10-22 03:09:26', NULL),
-(12, 'SamSung Galaxy A70', 'SamSungA70.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3920', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 2, 3, 1, 8200000, 4000000, '2019-10-22 03:09:26', NULL),
-(13, 'SamSung Galaxy Note 9', 'SamSungNote9.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4600', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 3, 3, 1, 16200000, 4000000, '2019-10-22 03:09:26', NULL),
-(14, 'SamSung Galaxy Note 10', 'SamSungNote10.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '5000', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 2, 3, 1, 28500000, 4000000, '2019-10-22 03:09:26', NULL),
-(15, 'SamSung Galaxy S10+', 'SamSungS10.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '5200', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 3, 3, 1, 30000000, 4000000, '2019-10-22 03:09:26', NULL),
-(16, 'SamSung Galaxy A7', 'SamSungA7.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3500', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 2, 1, 1, 2200000, 4000000, '2019-10-22 03:09:26', NULL);
+INSERT INTO `sanpham` (`id`, `ten`, `hinhanh`, `soluong`, `id_mausacsanpham`, `manhinh`, `camera_truoc`, `camera_sau`, `cpu`, `dungluongpin`, `trongluong`, `dophangiai_manhinh`, `kichthuoc`, `gps`, `bluetooth`, `id_theloai`, `id_hedieuhanh`, `id_ram`, `trangthai`, `gia`, `gia_sale`, `created_at`, `updated_at`) VALUES
+(1, 'Iphone 7 Plus', 'Iphone7Plus.jpg', 10, 2, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12MP', 'Apple A10 Fusion 4 nhân 64-bit', '1960', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 1, 1, 5000000, 4000000, '2019-10-22 02:29:49', '2019-10-22 02:00:34'),
+(2, 'Iphone 8 Plus', 'Iphone8Plus.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '2658', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 1, 7000000, 4000000, '2019-10-22 02:57:29', NULL),
+(3, 'Iphone 11', 'Iphone11.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '1988', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 1, 3500000, 0, '2019-10-22 02:58:12', NULL),
+(4, 'Iphone 11 Pro', 'Iphone11Pro.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3922', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 2, 1, 8200000, 4000000, '2019-10-22 03:09:26', NULL),
+(5, 'Iphone 11 Pro Max', 'Iphone11ProMax.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4212', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 1, 25000000, 0, '2019-10-22 03:09:26', NULL),
+(6, 'Iphone X', 'IphoneX.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3658', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 2, 1, 10300000, 4000000, '2019-10-22 03:09:26', NULL),
+(7, 'Iphone Xr', 'IphoneXr.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3782', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 1, 7400000, 4000000, '2019-10-22 03:09:26', NULL),
+(8, 'Iphone XS', 'IphoneXS.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3622', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 1, 18200000, 4000000, '2019-10-22 03:09:26', NULL),
+(9, 'Iphone XS Max', 'IphoneXSMax.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4588', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 1, 1, 3, 1, 29500000, 4000000, '2019-10-22 03:09:26', NULL),
+(10, 'SamSung Galaxy A30s', 'SamSungA30s.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4000', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 2, 1, 6200000, 4000000, '2019-10-22 03:09:26', NULL),
+(11, 'SamSung Galaxy A50s', 'SamSungA50s.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4300', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 3, 1, 9000000, 4000000, '2019-10-22 03:09:26', NULL),
+(12, 'SamSung Galaxy A70', 'SamSungA70.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3920', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 2, 1, 8200000, 4000000, '2019-10-22 03:09:26', NULL),
+(13, 'SamSung Galaxy Note 9', 'SamSungNote9.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '4600', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 3, 1, 16200000, 4000000, '2019-10-22 03:09:26', NULL),
+(14, 'SamSung Galaxy Note 10', 'SamSungNote10.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '5000', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 2, 1, 28500000, 4000000, '2019-10-22 03:09:26', NULL),
+(15, 'SamSung Galaxy S10+', 'SamSungS10.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '5200', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 3, 1, 30000000, 4000000, '2019-10-22 03:09:26', NULL),
+(16, 'SamSung Galaxy A7', 'SamSungA7.jpg', 10, 1, 'LED-backlit IPS LCD, 4.7\", Retina HD', '7 MP', '12 MP', 'Apple A10 Fusion 4 nhân 64-bit', '3500', '138', 'HD (750 x 1334 Pixels)', 'Dài 138.3 mm - Ngang 67.1 mm - Dày 7.1 mm', 'A-GPS, GLONASS', 'A2DP, LE, v4.2', 2, 2, 2, 1, 2200000, 4000000, '2019-10-22 03:09:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -363,12 +364,6 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
 -- Chỉ mục cho bảng `ram`
 --
 ALTER TABLE `ram`
@@ -381,7 +376,6 @@ ALTER TABLE `sanpham`
   ADD PRIMARY KEY (`id`),
   ADD KEY `sanpham_id_hedieuhanh_foreign` (`id_hedieuhanh`),
   ADD KEY `sanpham_id_ram_foreign` (`id_ram`),
-  ADD KEY `sanpham_id_bonhotrong_foreign` (`id_bonhotrong`),
   ADD KEY `id_theloai` (`id_theloai`),
   ADD KEY `id_mausacsanpham` (`id_mausacsanpham`);
 
@@ -424,13 +418,13 @@ ALTER TABLE `hedieuhanh`
 -- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `hoadonchitiet`
 --
 ALTER TABLE `hoadonchitiet`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `mausacsanpham`
@@ -503,8 +497,6 @@ ALTER TABLE `hoadonchitiet`
 --
 ALTER TABLE `sanpham`
   ADD CONSTRAINT `sanpham_ibfk_1` FOREIGN KEY (`id_theloai`) REFERENCES `theloai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `sanpham_ibfk_2` FOREIGN KEY (`id_mausacsanpham`) REFERENCES `mausacsanpham` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `sanpham_id_bonhotrong_foreign` FOREIGN KEY (`id_bonhotrong`) REFERENCES `ram` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sanpham_id_hedieuhanh_foreign` FOREIGN KEY (`id_hedieuhanh`) REFERENCES `hedieuhanh` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sanpham_id_ram_foreign` FOREIGN KEY (`id_ram`) REFERENCES `ram` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
